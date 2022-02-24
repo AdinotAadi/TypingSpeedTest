@@ -3,13 +3,15 @@ from curses import wrapper
 import time
 import random
 
-#Declaring Start Screen Function.
+
+# Declaring Start Screen Function.
 def start_screen(stdscr):
     stdscr.clear()
     stdscr.addstr("<---Welcome to Typing Speed Test!--->\n")
     stdscr.addstr("<---Press any key to continue.--->")
     stdscr.refresh()
     stdscr.getkey()
+
 
 def display_text(stdscr, target, current, wpm=0):
     stdscr.addstr(target)
@@ -23,10 +25,12 @@ def display_text(stdscr, target, current, wpm=0):
 
         stdscr.addstr(0, i, char, text_color)
 
+
 def load_text():
     with open("test_text.txt", "r") as f:
         lines = f.readlines()
         return random.choice(lines).strip()
+
 
 def type_test(stdscr):
     target_text = load_text()
@@ -60,7 +64,8 @@ def type_test(stdscr):
         elif len(current_text) < len(target_text):
             current_text.append(key)
 
-#Declaring Main Activity Function
+
+# Declaring Main Activity Function
 def main(stdscr):
     curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
@@ -75,5 +80,6 @@ def main(stdscr):
 
         if ord(key) == 27:
             break
+
 
 wrapper(main)
